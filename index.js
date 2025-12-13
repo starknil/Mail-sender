@@ -36,7 +36,7 @@ app.post("/send-mail", async (req, res) => {
   };
   
   if (!['text', 'html'].includes(type)) {
-      return res.status(500).json({ status: "error", error: "{html} / {text} is required!" });
+      return res.status(500).json({ status: "error", error: "type: {html} / {text} is required!" });
     }
   
 
