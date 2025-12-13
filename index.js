@@ -40,7 +40,7 @@ app.post("/send-mail", async (req, res) => {
     }
   
 
-  if (input){
+  if (!input){
     return res.status(500).json({ status: "error", error: "Email content for type '${type}' is required." });
   };
   
@@ -49,10 +49,9 @@ app.post("/send-mail", async (req, res) => {
     from: `Dappsics APP <${process.env.SMTP_USER}>`,
     to,
     subject,
+    [type]: input
   };
-  
-  if (html) mailOptions.html = html;
-  if (text) mailOptions.text = text;
+
 
   try {
     const info = await transporter.sendMail(mailOptions);
