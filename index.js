@@ -20,22 +20,28 @@ transporter.verify((error, success) => {
 });
 
 app.post("/send-mail", async (req, res) => {
-  const { to, subject, text, html } = req.body || {};
+  const { from, subject, to, type, input } = req.body || {};
+  
+  if (!from){
+    return res.status(500).json({ status: "error", error: "Sender 'from' is required. Example Platform name." });
+  };
+  
+   if (!subject){
+    return res.status(500).json({ status: "error", error: "{subject} is required!" });
+  };
+  
   
   if (!to){
     return res.status(500).json({ status: "error", error: "{to} is required!" });
   };
   
-  if (!subject){
-    return res.status(500).json({ status: "error", error: "{subject} is required!" });
-  };
+  if (!['text', 'html'].includes(type)) {
+      return res.status(500).json({ status: "error", error: "{html} / {text} is required!" });
+    }
   
-  if (!text && !html){
-    return res.status(500).json({ status: "error", error: "{html} / {text} is required!" });
-  };
-  
-  if (text && html){
-    return res.status(500).json({ status: "error", error: "{html} && {text} - only one is required!" });
+
+  if (input){
+    return res.status(500).json({ status: "error", error: "Email content for type '${type}' is required." });
   };
   
 
