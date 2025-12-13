@@ -46,7 +46,7 @@ app.post("/send-mail", async (req, res) => {
   
 
   const mailOptions = {
-    from,
+    from: "QEX Africa",
     to,
     subject,
     [type]: input
