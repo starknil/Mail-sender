@@ -46,7 +46,7 @@ app.post("/send-mail", async (req, res) => {
   
 
   const mailOptions = {
-    from: `Dappsics APP <${process.env.SMTP_USER}>`,
+    from,
     to,
     subject,
     [type]: input
