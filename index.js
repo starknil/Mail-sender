@@ -41,7 +41,7 @@ app.post("/send-mail", async (req, res) => {
   
 
   if (!input){
-    return res.status(500).json({ status: "error", error: "Email content for type '${type}' is required." });
+    return res.status(500).json({ status: "error", error: `Email content for type '${type}' is required.` });
   };
   
 
